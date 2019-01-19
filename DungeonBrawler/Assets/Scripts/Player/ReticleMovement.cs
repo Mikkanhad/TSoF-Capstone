@@ -38,10 +38,12 @@ public class ReticleMovement : MonoBehaviour {
     void Update()
     {
         playerNumber = player.GetComponent<PlayerController>().playerNumber;
+        ReticleControl();
+        /*
         switch (playerNumber)
         {
             case 1:
-                Reticle1Control();
+                ReticleControl();
                 break;
             case 2:
                 Reticle2Control();
@@ -50,6 +52,7 @@ public class ReticleMovement : MonoBehaviour {
                 Reticle3Control();
                 break;
         }
+        */
 
         angle = Mathf.Atan2(m_Vertical, m_Horizontal);
         float posx = player.transform.position.x;
@@ -160,5 +163,13 @@ public class ReticleMovement : MonoBehaviour {
             theScale.x *= -1;
             transform.localScale = theScale;
         }
+    }
+
+    private void ReticleControl()
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float angle = Mathf.Atan2(mousePosition.y - player.transform.position.y, mousePosition.x - player.transform.position.x);
+        m_Horizontal = Mathf.Cos(angle);
+        m_Vertical = Mathf.Sin(angle);
     }
 }

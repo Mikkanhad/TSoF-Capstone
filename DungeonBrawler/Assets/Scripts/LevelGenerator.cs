@@ -384,9 +384,22 @@ public class LevelGenerator : MonoBehaviour {
         //
         PGenerate();
         Construct();
-        Instantiate(Player, new Vector3(-3, 0, 0), Quaternion.identity);
-        Instantiate(Player2, new Vector3(0, 0, 0), Quaternion.identity);
-        Instantiate(Player3, new Vector3(3, 0, 0), Quaternion.identity);
+        if(PlayerStats.warriorNum == 1)
+        {
+            Instantiate(Player, new Vector3(0, 0, 0), Quaternion.identity);
+        }
+        if (PlayerStats.rogueNum == 1)
+        {
+            Instantiate(Player2, new Vector3(0, 0, 0), Quaternion.identity);
+        }
+        if (PlayerStats.wizardNum == 1)
+        {
+            Instantiate(Player3, new Vector3(0, 0, 0), Quaternion.identity);
+        }
+
+        //Instantiate(Player, new Vector3(-3, 0, 0), Quaternion.identity);
+        //Instantiate(Player2, new Vector3(0, 0, 0), Quaternion.identity);
+        //Instantiate(Player3, new Vector3(3, 0, 0), Quaternion.identity);
     }
 
     

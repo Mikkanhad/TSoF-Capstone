@@ -109,16 +109,16 @@ public class CharacterSelectionScene : MonoBehaviour
         P3Position[2] = WizardPositionP3;
 
         P1pos = P1.transform.position;
-        P2pos = P2.transform.position;
-        P3pos = P3.transform.position;
+        //P2pos = P2.transform.position;
+        //P3pos = P3.transform.position;
 
         P1pos.x = P1Position[P1posCounter];
-        P2pos.x = P2Position[P2posCounter];
-        P3pos.x = P3Position[P3posCounter];
+        //P2pos.x = P2Position[P2posCounter];
+        //P3pos.x = P3Position[P3posCounter];
 
         P1.transform.position = P1pos;
-        P2.transform.position = P2pos;
-        P3.transform.position = P3pos;
+        //P2.transform.position = P2pos;
+        //P3.transform.position = P3pos;
         DisableEffects();
     }
     private void Update()

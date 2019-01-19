@@ -90,9 +90,31 @@ public class GameManager : MonoBehaviour {
             minimap.SetActive(true);
         }
 
-        warriorIsDead = warrior.GetComponent<PlayerController>().isDead;
-        rogueIsDead = rogue.GetComponent<PlayerController>().isDead;
-        wizardIsDead = wizard.GetComponent<PlayerController>().isDead;
+        if(warrior)
+        {
+            warriorIsDead = warrior.GetComponent<PlayerController>().isDead;
+        }
+        else
+        {
+            warriorIsDead = true;
+        }
+        if(rogue)
+        {
+            rogueIsDead = rogue.GetComponent<PlayerController>().isDead;
+        }
+        else
+        {
+            rogueIsDead = true;
+        }
+        if(wizard)
+        {
+            wizardIsDead = wizard.GetComponent<PlayerController>().isDead;
+        }
+        else
+        {
+            wizardIsDead = true;
+        }
+        
 
         if (warriorIsDead && rogueIsDead && wizardIsDead)
         {

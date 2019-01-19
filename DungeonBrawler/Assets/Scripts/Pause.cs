@@ -12,6 +12,7 @@ public class Pause : MonoBehaviour {
 	{
 		//Get a component reference to ShowPanels attached to this object, store in showPanels variable
 		showPanels = GetComponent<ShowPanels>();
+        Cursor.visible = true;
 	}
 	// Update is called once per frame
 	void Update()

@@ -85,7 +85,15 @@ public class CharacterBarUIController : MonoBehaviour
                 }
             }
 
-            playerController = player.GetComponent<PlayerController>();
+
+            if (player == null)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                playerController = player.GetComponent<PlayerController>();
+            }
         }
 
         if(playerController == null)

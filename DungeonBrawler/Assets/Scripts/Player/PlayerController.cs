@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public bool cscheme1 = false;
     public bool cscheme2 = false;
     public bool cscheme3 = false;
+    public bool cscheme4 = false;
     public string location;
     public int enemies_left;
     public UnityEvent OnAbility2ConsecutiveEvent;
@@ -185,7 +186,7 @@ public class PlayerController : MonoBehaviour
             switch (playerNumber)
             {
                 case 1:
-                    Player1Control();
+                    PlayerControl();
                     break;
                 case 2:
                     Player2Control();
@@ -997,6 +998,10 @@ public class PlayerController : MonoBehaviour
         alreadyPoisoned = false;
         Destroy(poisonEffectCopy);
     }
+
+    //////////////////////////////////////////////////////////////////
+    // AUDIO FUNCTIONS
+    //////////////////////////////////////////////////////////////////
     private void PlaySelectedLine()
     {
         if(SelectedLines.Length == 0)
@@ -1080,4 +1085,74 @@ public class PlayerController : MonoBehaviour
         audioPlayer.clip = Ability2Lines[index];
         audioPlayer.Play();
     }
+
+    //////////////////////////////////////////////////////////////////
+    // NEW PLAYER CONTROLS
+    //////////////////////////////////////////////////////////////////
+    private void PlayerControl()
+    {
+        m_Horizontal = Input.GetAxis("Horizontal");
+        m_Vertical = Input.GetAxis("Vertical");
+        if(!m_Jump)
+        {
+            m_Jump = Input.GetButtonDown("JumpCS4");
+        }
+        if(!m_DoAttack)
+        {
+            m_DoAttack = Input.GetMouseButtonDown(0);
+        }
+        if(!m_DoAbility1)
+        {
+            m_DoAbility1 = Input.GetMouseButtonDown(1);
+        }
+        if(!m_DoAbility2)
+        {
+            m_DoAbility2 = Input.GetButtonDown("Ability2CS4");
+        }
+        //Manage kill features & gravity
+        if (m_PlayerStats.health <= 0)
+        {
+            KillPlayer();
+        }
+        if (m_Rigidbody2D.gravityScale < 3f && Input.GetButtonUp("JumpCS4"))
+        {
+            m_Rigidbody2D.gravityScale = 3f;
+        }
+        
+        //Add in revive mecahnics
+        if (!reviving)
+        {
+            if (Input.GetButtonDown("ReviveCS4") && IsThereDeadAround())
+            {
+                reviving = true;
+                movement = false;
+                reviveTimer += Time.deltaTime;
+            }
+        }
+        if (reviving)
+        {
+            if (reviveEffectCopy == null)
+            {
+                reviveEffectCopy = GameObject.Instantiate(reviveEffect);
+                reviveEffectCopy.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+            }
+
+            reviveTimer += Time.deltaTime;
+            if (reviveTimer >= 3f)
+            {
+                Destroy(reviveEffectCopy);
+                GameObject toRevive = GetNearestDeadPlayer();
+                toRevive.GetComponent<PlayerController>().RevivePlayer();
+                reviving = false;
+            }
+        }
+        if (!Input.GetButton("ReviveCS4"))
+        {
+            Destroy(reviveEffectCopy);
+            reviveTimer = 0;
+            movement = true;
+            reviving = false;
+        }
+    }
+
 }
