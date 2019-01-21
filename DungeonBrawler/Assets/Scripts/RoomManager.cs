@@ -38,19 +38,23 @@ public class RoomManager : MonoBehaviour {
     }
 	void Start () {
         warrior = GameObject.Find("Warrior(Clone)");
+        rogue = GameObject.Find("Rogue(Clone)");
+        wizard = GameObject.Find("Wizard(Clone)");
 
-        if (warrior != null)
-        {
-            rogue = GameObject.Find("Rogue(Clone)");
-            wizard = GameObject.Find("Wizard(Clone)");
-        }
-
-        if (warrior == null)
+        //Second check for testing due to running level generator scene in editor
+        if(warrior == null)
         {
             warrior = GameObject.Find("Warrior");
+        }
+        if (rogue == null)
+        {
             rogue = GameObject.Find("Rogue");
+        }
+        if (wizard == null)
+        {
             wizard = GameObject.Find("Wizard");
         }
+
         did_already = false;
         
 
@@ -96,15 +100,20 @@ public class RoomManager : MonoBehaviour {
                 lockDoors();
             }
 
-            if (warrior != null && rogue != null && wizard != null)
+            if(warrior != null)
             {
                 warrior.transform.position = target;
-                rogue.transform.position = target;
-                wizard.transform.position = target;
                 warrior.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                wizard.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
+            if (rogue != null)
+            {
+                rogue.transform.position = target;
                 rogue.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
+            }
+            if (wizard != null)
+            {
+                wizard.transform.position = target;
+                wizard.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
 
             teleport = GameObject.Find("Teleport(Clone)");
