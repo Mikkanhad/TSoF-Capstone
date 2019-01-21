@@ -262,7 +262,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Make player fall through platforms if they hit 'down' + 'jump' while on a platform
-        if (m_Vertical < -0.60)
+        if (Input.GetButton("Drop"))
         {
             if (m_OnPlatform && m_Jump)
             {

@@ -19,3 +19,11 @@ across various controller types.
 - The rogue character can dash in between the colliders of the platform segments
 - Platform dropping does not work at the moment so the only way to access rooms and areas lower than the starting room is
   to dash in between the platform collider segments
+
+1/21/2019
+-Fixed a bug where the players weren't being moved into the next room on hitting the transition trigger
+-Reworked platform dropping for the new control scheme so lower rooms can be access without exploiting collider spacings
+
+*Known Issues
+-Dread Knight boss room does not activate since it still requires that three players be present
+-Wizard's Lightning Warp ability cannot be aimed or controlled under the new control scheme

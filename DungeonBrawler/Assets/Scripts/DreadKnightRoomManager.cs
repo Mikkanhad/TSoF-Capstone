@@ -35,17 +35,20 @@ public class DreadKnightRoomManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         warrior = GameObject.Find("Warrior(Clone)");
+        rogue = GameObject.Find("Rogue(Clone)");
+        wizard = GameObject.Find("Wizard(Clone)");
 
-        if (warrior != null)
-        {
-            rogue = GameObject.Find("Rogue(Clone)");
-            wizard = GameObject.Find("Wizard(Clone)");
-        }
-
+        //Second check for testing due to running level generator scene in editor
         if (warrior == null)
         {
             warrior = GameObject.Find("Warrior");
+        }
+        if (rogue == null)
+        {
             rogue = GameObject.Find("Rogue");
+        }
+        if (wizard == null)
+        {
             wizard = GameObject.Find("Wizard");
         }
         did_already = false;
